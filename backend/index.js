@@ -65,14 +65,14 @@ app.post("/login", async (req, res) => {
         res
           .cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
-            sameSite: "strict",
+            secure: true, // true in production (HTTPS)
+            sameSite: "none",
             maxAge: 5000,
           })
           .cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
-            sameSite: "strict",
+            secure: true, // true in production (HTTPS)
+            sameSite: "none",
             maxAge: 3600 * 1000 * 24 * 7,
           })
           .status(200)
@@ -107,8 +107,8 @@ app.get("/refresh", (req, res) => {
   res
     .cookie("accessToken", newAccessToken, {
       httpOnly: true,
-      secure: false, // true in production (HTTPS)
-      sameSite: "strict",
+      secure: true, // true in production (HTTPS)
+      sameSite: "none",
       maxAge: 5000,
     })
     .status(200)
@@ -133,13 +133,13 @@ app.get("/logout", async (req, res) => {
     res
       .clearCookie("accessToken", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
       })
       .clearCookie("refreshToken", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json({ message: "Logged the user out!" });
@@ -149,4 +149,6 @@ app.get("/logout", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, ()=>{console.log("The server is running!")});
+app.listen(PORT, () => {
+  console.log("The server is running!");
+});
