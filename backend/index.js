@@ -149,4 +149,4 @@ app.get("/logout", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT);
+app.listen(PORT, ()=>{console.log("The server is running!")});
