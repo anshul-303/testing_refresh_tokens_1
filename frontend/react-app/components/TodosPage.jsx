@@ -4,7 +4,6 @@ import { getUserInfo } from "../fetchApi/getUserInfo";
 import { logoutUser } from "../fetchApi/getUserInfo";
 
 export default function TodosPage() {
-  const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -12,7 +11,6 @@ export default function TodosPage() {
       const data = await getUserInfo(navigate);
       console.log(data);
       setEmail(data.email);
-      setUserId(data.userId);
     };
     fetchUserDetailsApi(navigate);
   });
@@ -21,7 +19,6 @@ export default function TodosPage() {
     <>
       <div className="w-screen h-screen bg-zinc-900 text-white flex justify-center flex-col items-center">
         Todos Page
-        <div>User ID: {userId}</div>
         <div>Email ID: {email}</div>
         <button
           onClick={async () => {
